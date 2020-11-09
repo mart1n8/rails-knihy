@@ -30,4 +30,34 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  save: "save"
+  edit: "edit"
+  delete: "delete"
   hello: "Hello world"
+  auth:
+    email: "email address"
+    password: "password"
+    password_min_info: " characters minimum"
+    password_confirmation: "password confirmation"
+    register: "registration"
+    log_in: "log in"
+    logout: "log out"
+    remember_me: "remember me"
+    forgot_your_password: "Forgot your password?"
+    send_me_reset_password_instructions: "Send me reset password instructions"
+  devise:
+      sessions:
+        user:
+          signed_in: 'Welcome user, you are signed inasdasd.'
+
+
+  ad_category:
+    category: "category"
+    categories: "categories"
+    new_category: "new category"
+    edit_category: "edit category"
+    title: "name"
+    ad_category_id: "main category"
+    logo: "logo"
+    val:
+      title_presense: "^asdTitle of category cannot be blank."

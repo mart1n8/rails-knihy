@@ -1,15 +1,28 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="sk">
   <head>
-    <title>RailsKnihy</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>RailsKnihy</title>
   </head>
+  <body class="container">
+    <div class="row">
+        <%= render "layouts/nav" %>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <%= render "layouts/side" %>
+      </div>
+      <div class="col-9">
+        <%= render "layouts/messages" %>
+        <%= yield %>     
+      </div>
+    </div>
 
-  <body>
-    <%= yield %>
   </body>
 </html>
