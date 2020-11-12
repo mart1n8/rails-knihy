@@ -12,13 +12,15 @@
   </head>
   <body class="container">
     <div class="row">
+      <div class="col-12">
         <%= render "layouts/nav" %>
+      </div>
     </div>
     <div class="row">
       <div class="col-3">
         <%= render "layouts/side" %>
       </div>
-      <div class="col-9">
+      <div class="col-9 mt-1">
         <%= render "layouts/messages" %>
         <%= yield %>     
       </div>

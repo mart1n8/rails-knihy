@@ -25,6 +25,12 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'bootstrap', '~> 4.5.3'
 gem 'jquery-rails'
+gem 'friendly_id', '~> 5.4.0'
+gem 'will_paginate', '~> 3.1.0'
+gem 'carrierwave', '~> 2.0'
+gem 'material_icons'
+gem 'custom_error_message', '~> 1.1', '>= 1.1.1'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

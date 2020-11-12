@@ -1,0 +1,5 @@
+<h1><%= t('author.add_author').capitalize %></h1>
+
+<%= render 'form', author: @author, url: create_author_path %>
+
+<%= link_to 'Back', authors_path %>

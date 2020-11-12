@@ -1,0 +1,31 @@
+<h1><%= t('book_category.book_categories').capitalize %></h1>
+<table class="table table-striped">
+    <thead>
+        <tr class="thead-dark">
+            <th>#</th>
+            <th><%= t('book_category.title') %>:</th>
+            <th><%= t('slug') %>:</th>
+            <th><%= t('options') %>:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% if !@book_categories.nil? %>
+            <% @book_categories.each do |book_category| %>
+                <tr>
+                    <td><%= book_category.id  %></td>
+                    <td><%= book_category.title  %></td>
+                    <td><%= book_category.slug %></td>
+                    <td>
+                        <%= link_to material_icon.edit, admin_edit_book_category_path(book_category), alt: t('edit'), title: t('edit') %>
+                        <%= link_to material_icon.delete_forever, admin_delete_book_category_path(book_category), method: :delete, data: { confirm: 'Skutočne chcete vymazať túto kategóriu?' }, alt: t('delete'), title: t('delete'), style: "color:red" %>
+                    </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </tbody>
+</table>
+<hr>
+<div class="mt-5">
+    <h2><%= t('book_category.add_book_category').capitalize %></h2>
+    <%= render 'form', book_category: @book_category, url: admin_book_categories_path %>
+</div>

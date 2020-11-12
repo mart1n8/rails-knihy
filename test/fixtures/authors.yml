@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  slug: MyString
+  nation: one
+  birth_day: 2020-11-10
+  death_day: 2020-11-10
+  birth_place: MyString
+  death_place: MyString
+  photo: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  slug: MyString
+  nation: two
+  birth_day: 2020-11-10
+  death_day: 2020-11-10
+  birth_place: MyString
+  death_place: MyString
+  photo: MyString

@@ -1,0 +1,34 @@
+<h2><%= t('author.authors').capitalize %></h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th><%= t('author.full_name') %></th>
+            <th><%= t('nation.nation') %></th>
+            <th><i class="material-icons">camera_alt</i></th>
+            <th><%= t('options') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @authors.each do |author| %>
+            <tr>
+                <td><%= author.id %></td>
+                <td><%= author.full_name %></td>
+                <td><%= author.nation.title if !author.nation.nil? %></td>
+                <td>
+                    <%= '<i class="material-icons">check_circle_outline</i>'.html_safe if !author.photo.blank? %>
+                    <%= '<i class="material-icons" style="color:red">clear</i>'.html_safe if author.photo.blank? %>
+                </td>
+                <td>
+                    <%= link_to material_icon.remove_red_eye, author_path(author) %>
+                    <%= link_to material_icon.edit, edit_author_path(author) %>
+                    <%= link_to material_icon.delete_forever, delete_author_path(author), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+            </tr>
+        <% end %>
+    <tbody>
+</table>
+<div class="pagination">
+    <%= will_paginate @authors %>
+</div>

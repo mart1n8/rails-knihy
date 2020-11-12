@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    protect_from_forgery with: :exception
+    
     helper_method :is_super_user
 
     def is_super_user

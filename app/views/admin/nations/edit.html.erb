@@ -1,0 +1,7 @@
+<div class="float-right mr-10">
+    <%= link_to "<<< #{t('nation.nations')}", admin_nations_path %>
+</div>
+<div class="mt-3">
+    <h2><%= t('nation.edit_nation').capitalize %></h2>
+    <%= render 'form', nation: @nation, url: admin_edit_nation_path %>
+</div>

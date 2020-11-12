@@ -1,0 +1,20 @@
+<%= form_with(model: nation, local: true, url: url) do |form| %>
+  <%= render 'shared/error_messages', model: nation%>
+    <div class="row">
+        <div class="form-group col-5">
+        <%= form.label :title, t('nation.nation').capitalize %>
+        <%= form.text_field :title, autofocus: true, class: "form-control", placeholder: t('nation.nation') %>
+        </div>
+
+        <div class="form-group col-5">
+        <%= form.label :flag,  t('nation.flag').capitalize %>
+        <%= form.file_field :flag, class: "form-control-file" %>
+        </div>
+    </div>
+    <div class="row mt-3 mb-2">
+      <div class="col-10 text-center">
+          <%= form.submit t('save').titleize, class: "btn btn-primary" %>
+      </div>
+    </div>
+<% end %>
+

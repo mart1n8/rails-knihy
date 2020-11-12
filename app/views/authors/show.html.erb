@@ -1,0 +1,46 @@
+<h1><%= @author.full_name %></h1>
+  <div class="row">
+      <div class="col-4 text-center">
+        <%= image_tag (@author.photo.url.presence || "https://via.placeholder.com/150x200"), class: "img-fluid", style: "border-radius: 1.5em" %>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <div class="col-12">
+              <% if @author.nation.presence %>
+                <div>
+                  <strong><%= t('nation.nation').capitalize %>: </strong><%= @author.nation.title %>
+                </div>
+              <% end %>
+              <% if @author.birth_day.presence %>
+                <div>
+                  <strong><%= t('author.birth_day').capitalize %>: </strong><%= @author.birth_day.strftime("%d.%m.%Y") %>
+                </div>
+              <% end %>
+              <% if @author.birth_place.presence %>
+                <div>
+                  <strong><%= t('author.birth_place').capitalize %>: </strong><%= @author.birth_place %>
+                </div>
+              <% end %>
+              <% if @author.death_day.presence %>
+                <div>
+                  <strong><%= t('author.death_day').capitalize %>: </strong><%= @author.death_day.strftime("%d.%m.%Y") %>
+                </div>
+              <% end %>
+              <% if @author.death_place.presence %>
+                <div>
+                  <strong><%= t('author.death_place').capitalize %>: </strong><%= @author.death_place %>
+                </div>
+              <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+  <% if user_signed_in? %>
+    <hr>
+    <div class="row justify-content-end">
+      <div class="col-4 text-right">
+        <%= link_to material_icon.edit, edit_author_path(@author), class: "btn btn-sm btn-info" %>
+        <%= link_to material_icon.delete_forever, delete_author_path(@author), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"  %>
+      </div>
+    <div>
+  <% end%>

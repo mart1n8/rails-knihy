@@ -1,0 +1,32 @@
+<h1><%= t('nation.nations').capitalize %></h1>
+<table class="table table-striped">
+    <thead>
+        <tr class="thead-dark">
+            <th>#</th>
+            <th><%= t('nation.nation') %>:</th>
+            <th><%= t('nation.flag') %>:</th>
+            <th><%= t('options') %>:</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @nations.each do |nation| %>
+            <tr>
+                <td><%= nation.id  %></td>
+                <td><%= nation.title  %></td>
+                <td><%= image_tag(nation.flag.url, alt: "#{nation.title} logo", height:"25") if !nation.flag.blank? %></td>
+                <td>
+                    <%= link_to material_icon.edit, admin_edit_nation_path(nation), alt: t('edit'), title: t('edit') %>
+                    <%= link_to material_icon.delete_forever, admin_delete_nation_path(nation), method: :delete, data: { confirm: 'Skutočne chcete vymazať národnosť' }, alt: t('delete'), title: t('delete'), style: "color:red" %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<div class="pagination">
+    <%= will_paginate @nations, :class=>"pagination" %>
+</div>
+<hr>
+<div class="mt-5">
+    <h2><%= t('nation.add_nation').capitalize %></h2>
+    <%= render 'form', nation: @nation, url: admin_nations_path %>
+</div>
