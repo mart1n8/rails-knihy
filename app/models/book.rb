@@ -1,11 +1,11 @@
 class Book < ApplicationRecord
     extend FriendlyId
     friendly_id :slug_string, use: :slugged
-
+    mount_uploader :cover_img, BookCoverImgUploader
 
     has_and_belongs_to_many :book_categories
     has_and_belongs_to_many :authors
-    mount_uploader :cover_img, BookCoverImgUploader
+    has_many :comments, :as => :commentable
 
 
     validates :name, presence: { message: "^Názov knižky nemôže byť prázdne."}

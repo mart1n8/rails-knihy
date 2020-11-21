@@ -1,40 +1,34 @@
 <h1><%= @book.name %></h1>
   <div class="row">
-      <div class="col-4 text-center">
-        <%= image_tag (@book.cover_img.url.presence || "https://via.placeholder.com/150x200"), class: "img-fluid", style: "border-radius: 1.5em" %>
-      </div>
-      <div class="col-7">
-        <div class="row">
-          <div class="col-12">
-                <div>
-                  <strong>
-                    <%= "#{t('author.author').titleize}: ".html_safe if @book.authors.count == 1 %>
-                    <%= "#{t('author.authors').titleize}: ".html_safe if @book.authors.count > 2 %>
-                  </strong>
-                  <% @book.authors.each do |author| %>
-                    <%= link_to "#{author.full_name}", author_path(author) %><%= ", "%>
-                  <% end %>
-                </div>
-              <% if @book.original_name.presence %>
-                <div>
-                  <strong><%= t('book.original_name').titleize %>: </strong><%= @book.original_name %>
-                </div>
-              <% end %>
-              <% if @book.publish_year.presence %>
-                <div>
-                  <strong><%= t('book.publish_year').titleize %>: </strong><%= @book.publish_year %>
-                </div>
-              <% end %>
-          </div>
+    <div class="col-12">
+        <%= image_tag (@book.cover_img.url.presence || "https://via.placeholder.com/150x200"), class: "img-fluid float-left mr-3 mb-4", style: "border-radius: 1.5em" %>
+        <div>
+          <strong>
+            <%= "#{t('author.author').titleize}: ".html_safe if @book.authors.count == 1 %>
+            <%= "#{t('author.authors').titleize}: ".html_safe if @book.authors.count > 2 %>
+          </strong>
+          <% @book.authors.each do |author| %>
+            <%= link_to "#{author.full_name}", author_path(author) %><%= ", "%>
+          <% end %>
         </div>
+        <% if @book.original_name.presence %>
+          <div>
+            <strong><%= t('book.original_name').titleize %>: </strong><%= @book.original_name %>
+          </div>
+        <% end %>
+        <% if @book.publish_year.presence %>
+          <div>
+            <strong><%= t('book.publish_year').titleize %>: </strong><%= @book.publish_year %>
+          </div>
+        <% end %>
+        <% if @book.about.presence %>
+          <div class="mt-5">
+            <h4><%= t('book.about').capitalize %></h4>
+            <div class="text-justify"><%= @book.about %></div>
+          </div>
+        <% end %>
     </div>
   </div>
-    <% if @book.about.presence %>
-      <div class="mt-2">
-        <h4><%= t('book.about').titleize %></h4>
-        <div><%= @book.about %></div>
-      </div>
-    <% end %>
   <% if user_signed_in? %>
     <hr>
     <div class="row justify-content-end">

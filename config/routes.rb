@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'home#index' 
   devise_for :users, path: '', path_names: { sign_in: 'prihlasit', sign_out: 'odhlasit', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'registracia', sign_up: '' }
 
@@ -42,4 +41,12 @@ Rails.application.routes.draw do
     patch 'kniha/:id/upravit', to: 'books#update', as: 'update_book'
     delete 'kniha/:id/vymazat', to: 'books#destroy', as: 'delete_book'
     get 'kniha/:id', to: 'books#show', as: 'book'
+
+
+  #COMMENTS
+  get 'komentar', to: 'comments#new'
+  post 'komentar/pridat', to: 'comments#create', as: 'create_comment'
+  get 'komentar/:id/upravit', to: 'comments#edit', as: 'edit_comment'
+  patch 'komentar/:id/upravit', to: 'comments#update', as: 'update_comment'
+  delete 'komentar/:id/vymazat', to: 'comments#destroy', as: 'delete_comment'
 end

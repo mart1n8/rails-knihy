@@ -44,6 +44,7 @@ sk:
     day_names: [Pondelok, Utorok, Streda, Štvrtok, Piatok, Sobota, Nedeľa]
     month_names: [~, Január, Február, Marec, Apríl, Máj, Jún, Júl, August, September, Október, November, December]
   auth:
+    username: "používateľské meno"
     email: "emailová adresa"
     password: "heslo"
     password_min_info: " minimálne znakav"
@@ -100,4 +101,10 @@ sk:
     about: "o knižke"
     new_book: "nová knižka"
     add_book: "pridať knižku"
+  comment:
+    comment: "komentár"
+    comments: "komentáre"
+    add_comment: "pridať komentár"
+    only_signed: "Iba prihlásený užívateľia môžu pridávať komentáre."
+
 

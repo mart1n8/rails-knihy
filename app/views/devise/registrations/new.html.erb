@@ -5,8 +5,12 @@
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="form-group">
+      <%= f.label :username, t('auth.username').titleize %>: <br />
+      <%= f.text_field :username, autofocus: true, autocomplete: "email", class: "form-control", style: "width:50%", placeholder: "username" %>
+    </div>
+    <div class="form-group">
       <%= f.label :email, t('auth.email').titleize %>: <br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style: "width:50%", placeholder: "email@adresa.sk" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control", style: "width:50%", placeholder: "email@adresa.sk" %>
     </div>
 
     <div class="form-group mt-3">

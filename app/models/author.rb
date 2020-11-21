@@ -6,6 +6,7 @@ class Author < ApplicationRecord
   belongs_to :nation, optional: true
   belongs_to :user
   has_many :books, dependent: :destroy
+  has_many :comments, :as => :commentable
 
   validates :first_name, presence: { message: "^#{I18n.t('author.first_name').capitalize} nemôže byť prázdne." }
   validates :last_name, presence: { message: "^#{I18n.t('author.last_name').capitalize} nemôže byť prázdne." }
