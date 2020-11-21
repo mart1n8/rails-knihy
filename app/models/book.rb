@@ -5,7 +5,7 @@ class Book < ApplicationRecord
 
     has_and_belongs_to_many :book_categories
     has_and_belongs_to_many :authors
-    has_many :comments, :as => :commentable
+    has_many :comments, :as => :commentable, :dependent => :destroy
 
 
     validates :name, presence: { message: "^Názov knižky nemôže byť prázdne."}

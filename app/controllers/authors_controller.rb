@@ -1,7 +1,7 @@
 require 'json'
 
 class AuthorsController < ApplicationController
-  before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :set_author, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :search, :show]
 
   # GET /authors
@@ -23,6 +23,7 @@ class AuthorsController < ApplicationController
   # GET /authors/1
   # GET /authors/1.json
   def show
+    @author = Author.includes(:comments).friendly.find(params[:id])
   end
 
   # GET /authors/new
@@ -69,6 +70,8 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1
   # DELETE /authors/1.json
   def destroy
+    @author.books.delete_all
+    
     @author.destroy
     respond_to do |format|
       flash[:error] = "Autor #{@author.full_name} bol odstránený."

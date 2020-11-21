@@ -37,10 +37,37 @@
   </div>
   <% if user_signed_in? %>
     <hr>
-    <div class="row justify-content-end">
-      <div class="col-4 text-right">
+    <div class="row d-block">
+      <div class="col-12 text-right">
         <%= link_to material_icon.edit, edit_author_path(@author), class: "btn btn-sm btn-info" %>
         <%= link_to material_icon.delete_forever, delete_author_path(@author), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"  %>
       </div>
     <div>
   <% end%>
+  <div class="row">
+    <div class="col-12">
+      <h2><%= t('comment.add_comment').titleize %></h2>
+      <%= render 'comments/form', comment: Comment.new, url: create_comment_path, commentable_id: @author.id, commentable_type: "Author" %>
+    </div>
+  </div>
+  <h2 class="mt-4">Komentáre:</h2>
+  <div class="row mt-1">
+    <% @author.comments.each do |comment| %>
+      <div class="card col-12" style="width: 18rem;">
+        <div class="card-body">
+          <p class="card-text">
+          <strong><%= comment.user.username %>:</strong><br>
+            <%= comment.text %>
+          </p>
+        </div>
+      <% if current_user.id == comment.user.id %>
+        <div class="col-12 text-right">
+          <%= link_to material_icon.edit, edit_comment_path(comment) %>
+          <%= link_to material_icon.delete_forever, delete_comment_path(comment), method: :delete, data: { confirm: 'Skutočne chcete vymazať komentár?' }, class: "color:red"%>
+        </div>
+      <% end %>
+      </div>
+  <% end %>
+</div>
+
+

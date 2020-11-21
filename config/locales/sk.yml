@@ -105,6 +105,8 @@ sk:
     comment: "komentár"
     comments: "komentáre"
     add_comment: "pridať komentár"
+    edit_comment: "upraviť komentár"
     only_signed: "Iba prihlásený užívateľia môžu pridávať komentáre."
+
 
 

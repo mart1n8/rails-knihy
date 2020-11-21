@@ -12,7 +12,11 @@
           </div>
     </div>
   <% end %>
-
+  <% if @books.count == 0 %>
+    <div class="text-danger font-weight-bold">
+      Zatiaľ nebol pridaná žiadna kniha. Môžeš nejakú pridať <%= link_to "TU", new_book_path%>.
+    </div>
+  <% end %>
 <div class="row">
   <div class="col-12 justify-content-center text-center">
     <%= will_paginate @books %>
