@@ -1,12 +1,19 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :search, :show]
+
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.order(created_at: :desc).paginate(page: params[:page], per_page: 20)
   end
-
+  
+  # GET /books
+  # GET /books.json
+  def admin
+    @books = Book.includes(:authors).paginate(page: params[:page], per_page: 30)
+  end
   # GET /books/1
   # GET /books/1.json
   def show
@@ -15,6 +22,7 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @book_categories = BookCategory.order(title: :asc).all
   end
 
   # GET /books/1/edit
@@ -28,7 +36,8 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        flash[:notice] = "Knižka bola pridaná."
+        format.html { redirect_to @book }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
@@ -42,7 +51,8 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        flash[:notice] = "Knižka bola upravená."
+        format.html { redirect_to @book }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit }
@@ -56,7 +66,8 @@ class BooksController < ApplicationController
   def destroy
     @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      flash[:notice] = "Knižka bola vymazaná."
+      format.html { redirect_to books_url }
       format.json { head :no_content }
     end
   end
@@ -64,11 +75,11 @@ class BooksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_book
-      @book = Book.find(params[:id])
+      @book = Book.includes(:authors).friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:name, :original_name, :slug, :cover_img, :publish_year, :about)
+      params.require(:book).permit(:name, :original_name, :slug, :cover_img, :publish_year, :about, :author_ids => [], :book_category_ids => [])
     end
 end

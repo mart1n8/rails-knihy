@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :books
   root to: 'home#index' 
   devise_for :users, path: '', path_names: { sign_in: 'prihlasit', sign_out: 'odhlasit', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'registracia', sign_up: '' }
 
@@ -31,4 +30,16 @@ Rails.application.routes.draw do
     patch 'autor/:id/upravit', to: 'authors#update', as: 'update_author'
     delete 'autor/:id/vymazat', to: 'authors#destroy', as: 'delete_author'
     get 'autor/:id', to: 'authors#show', as: 'author'
+
+    get 'api/authors_search', to: 'authors#search', as: 'authors_search'
+
+  #BOOKS
+    get 'knihy', to: 'books#index', as: 'books'
+    get 'knihy/admin', to: 'books#admin', as: 'admin_books'
+    get 'kniha/pridat', to: 'books#new', as: 'new_book'
+    post 'kniha/pridat', to: 'books#create', as: 'create_book'
+    get 'kniha/:id/upravit', to: 'books#edit', as: 'edit_book'
+    patch 'kniha/:id/upravit', to: 'books#update', as: 'update_book'
+    delete 'kniha/:id/vymazat', to: 'books#destroy', as: 'delete_book'
+    get 'kniha/:id', to: 'books#show', as: 'book'
 end

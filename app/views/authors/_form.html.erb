@@ -8,7 +8,7 @@
       <div class="row">
         <div class="form-group col-6">
           <%= form.label :first_name, t('author.first_name').capitalize %>
-          <%= form.text_field :first_name, class: "form-control" %>
+          <%= form.text_field :first_name, class: "form-control", autofocus: true %>
         </div>
         <div class="form-group col-6">
           <%= form.label :last_name, t('author.last_name').capitalize %>
@@ -18,7 +18,7 @@
       <div class="row">
         <div class="form-group col-6">
         <%= form.label :nation_id, t('nation.nation').capitalize %>
-        <%= form.select :nation_id, Nation.all.collect { |p| [ p.title, p.id ] }, {include_blank: "--- #{t('nation.nation')} ---", :selected => author.nation_id}, {:class=>"form-control", :style=>"width: 50%"} %>
+        <%= form.select :nation_id, Nation.all.collect { |p| [ p.title, p.id ] }, {include_blank: "#{t('nation.nation')}", :selected => author.nation_id}, {:class=>"form-control", :style=>"width: 50%"} %>
         </div>
         <div class="form-group col-6">
           <%= form.label :photo, t('author.photo').capitalize %>

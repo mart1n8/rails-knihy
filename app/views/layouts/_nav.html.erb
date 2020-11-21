@@ -12,7 +12,7 @@
             <%= link_to t('author.authors').capitalize, authors_path, class:"nav-link" %>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
+            <%= link_to t('book.books').capitalize, books_path, class:"nav-link" %>
       </li>
     </ul>
     <span class="navbar-text">
@@ -20,7 +20,6 @@
             <%= current_user.email %>
             <%= " | "%>
             <%= link_to t('auth.logout'), destroy_user_session_path, method: "delete" if user_signed_in? %>
-
         <% end %>
     </span>
   </div>

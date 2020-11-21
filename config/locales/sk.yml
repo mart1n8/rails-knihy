@@ -85,11 +85,19 @@ sk:
     death_place: "miesto úmrtia"
     photo: "fotografia"
   book_category:
-    book_category: "kategória kník"
+    book_category: "kategória kníh"
     book_categories: "kategórie kníh"
     title: "názov kategórie"
     add_book_category: "pridať kategóriu"
     edit_book_category: "upraviť kategóriu"
-    
-
+  book:
+    book: "kniha"
+    books: "knihy"
+    name: "názov"
+    original_name: "originálny názov"
+    cover_img: "obal knižky"
+    publish_year: "rok publikovania"
+    about: "o knižke"
+    new_book: "nová knižka"
+    add_book: "pridať knižku"
 

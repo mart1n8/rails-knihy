@@ -1,5 +1,8 @@
+require 'json'
+
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :search, :show]
 
   # GET /authors
   # GET /authors.json
@@ -9,6 +12,13 @@ class AuthorsController < ApplicationController
   def admin
     @authors = Author.includes(:nation).paginate(page: params[:page], per_page: 30)
   end
+
+  def search
+    return false if !params[:phrase].presence or params[:phrase].blank?
+    @authors = Author.search(params[:phrase])
+    render json: @authors 
+  end
+
 
   # GET /authors/1
   # GET /authors/1.json
@@ -28,10 +38,11 @@ class AuthorsController < ApplicationController
   # POST /authors.json
   def create
     @author = Author.new(author_params)
-
+    @author.user_id = current_user.id
     respond_to do |format|
       if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
+        flash[:notice] = "Autor #{@author.full_name} bol pridaný."
+        format.html { redirect_to @author }
         format.json { render :show, status: :created, location: @author }
       else
         format.html { render :new }

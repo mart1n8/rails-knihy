@@ -5,9 +5,9 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.string :original_name
       t.string :slug
       t.string :cover_img
-      t.year :publish_year
+      t.string :publish_year
       t.text :about
-
+      t.references :user, null:false, foreign_key: true, default: 1
       t.timestamps
     end
   end

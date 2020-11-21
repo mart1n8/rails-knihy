@@ -2,10 +2,9 @@
 <% if is_super_user %>
     <li><%= link_to t('nation.nations'), admin_nations_path  %></li>
     <li><%= link_to t('author.authors'), admin_authors_path  %></li>
+
+    <li><%= link_to t('book.books'), admin_books_path  %></li>
     <li><%= link_to t('book_category.book_categories'), admin_book_categories_path  %></li>
     <hr>
 <% end %>
-
-<%= link_to "odhlásit", destroy_user_session_path, method: "delete" if user_signed_in? %>
-
 </div>

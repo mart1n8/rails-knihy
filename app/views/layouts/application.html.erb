@@ -7,7 +7,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <title>RailsKnihy</title>
   </head>
   <body class="container">
@@ -20,7 +22,7 @@
       <div class="col-3">
         <%= render "layouts/side" %>
       </div>
-      <div class="col-9 mt-1">
+      <div class="col-9 mt-3">
         <%= render "layouts/messages" %>
         <%= yield %>     
       </div>

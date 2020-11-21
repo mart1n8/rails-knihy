@@ -1,47 +1,123 @@
-<%= form_with(model: book, local: true) do |form| %>
-  <% if book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
-
-      <ul>
-        <% book.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: book, url: url, local: true) do |form| %>
+  <%= render 'shared/error_messages', model: book%>
+  <div class="row">
+    <div class="col-3 text-center">
+      <%= image_tag (book.cover_img.url.presence || "https://via.placeholder.com/150x200"), class: "img-fluid" %>
     </div>
+    <div class="col-9">
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <%= form.label :name, t('book.name').capitalize %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :authors, t('author.authors').capitalize %>
+            <input type="text" value="" id="author_search" class="form-control" type="search">
+            <div id="authors_fiels" style="list-style-type:none" class="pl-1 pt-1"></div>
+          </div>
+        </div>
+        <div class="col-6">
+         <div class="form-group">
+            <%= form.label :original_name, t('book.original_name').capitalize %>
+            <%= form.text_field :original_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :cover_img, t('book.cover_img').capitalize %>
+            <%= form.file_field :cover_img, class: "form-control-file" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :publish_year, t('book.publish_year').capitalize %>
+            <%= form.text_field :publish_year, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="row actions mt-3">
+        <div class="col-12">
+          <%= form.label :about, t('book_category.book_category').capitalize %><br>
+          <%= form.collection_check_boxes(:book_category_ids, BookCategory.all, :id, :title) do |book_cat| %>
+              <div class="mr-4 d-inline-block">
+                <%= book_cat.label(:"data-value" => book_cat.value) { "#{book_cat.check_box} #{book_cat.text}".html_safe }%>
+              </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row actions mt-3">
+        <div class="col-12">
+          <%= form.label :about, t('book.about').capitalize %>
+          <%= form.text_area :about, class: "form-control w-full", style: "height:15em" %>
+        </div>
+      </div>
+      <div class="row actions mt-3">
+        <div class="col-12 text-center ">
+            <%= form.submit t('save').capitalize , class: "btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :original_name %>
-    <%= form.text_field :original_name %>
-  </div>
+  <script>
+  var author_list = []
+    $( document ).ready(function() {
+         authors_list = <%= raw book.authors_hash_list.to_json %>
+          $.each(authors_list,function(index, value){
+                    addAuthor(index, value)
+          });
+    });
 
-  <div class="field">
-    <%= form.label :slug %>
-    <%= form.text_field :slug %>
-  </div>
 
-  <div class="field">
-    <%= form.label :cover_img %>
-    <%= form.text_field :cover_img %>
-  </div>
+  var options = {
+          url: function(phrase) {
+            return "/api/authors_search";
+          },
+          getValue: function(element) {
+            return `${element.first_name} ${element.last_name} `;
+          },
+          ajaxSettings: {
+            method: "GET",
+            data: {
+              dataType: "json"
+            }
+          },
+          preparePostData: function(data) {
+            data.phrase = $("#author_search").val();
+            return data;
+          },
+          requestDelay: 400,
+          list: {
+            onChooseEvent: function() {
+                var authorData = $("#author_search").getSelectedItemData();
+                var author_id = authorData.id;
+                var author_fullName = `${authorData.first_name} ${authorData.last_name}`
+                addAuthor(author_id, author_fullName)
+                $("#author_search").val("")
+            },
+        }
+      };
 
-  <div class="field">
-    <%= form.label :publish_year %>
-    <%= form.text_field :publish_year %>
-  </div>
+      function addAuthor(author_id, author_fullName) {
+        if(authors_list[author_id]!=""){
+            authors_list[author_id] = author_fullName
+            $("#authors_fiels").append(`
+                <div id="book_author_ids_${author_id}" >${author_fullName}
+                    <i class="material-icons md-18" style="color:red; cursor: pointer;" onclick="removeAuthor(${author_id})">delete_forever</i>
+                  <input type="hidden" name="book[author_ids][]" value="${author_id}">
+                </div>
+            `);
+        } else{
+            console.log("Author is already in list.")
+        }
+      }
 
-  <div class="field">
-    <%= form.label :about %>
-    <%= form.text_area :about %>
-  </div>
+      function removeAuthor(author_id) {
+          if(author_id == "") return false;
+          delete authors_list[author_id]   // remove author from js array
+          $('#book_author_ids_'+author_id).remove();              // remove author from html
+        }
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    $("#author_search").easyAutocomplete(options);
+
+
+  </script>
