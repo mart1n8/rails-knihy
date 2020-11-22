@@ -63,6 +63,11 @@ sk:
       registrations:
         user:
           signed_up: 'Vitaj! Teraz si registrovaný a prihlásený.'
+      failure:
+        user:
+          unauthenticated: "Na prístup do tejto časti stránky sa musíte prihlásiť."
+          invalid: "Prihlásenie sa nepodarilo. Chybná emailová adresa alebo heslo."
+          not_found_in_database: "Prihlásenie sa nepodarilo. Chybná emailová adresa alebo heslo."
   will_paginate:
     previous_label: "predchádzajúci"
     next_label: "ďaľší"

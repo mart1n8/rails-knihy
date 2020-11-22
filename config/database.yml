@@ -5,25 +5,25 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 #
-default: &default
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+# default: &default
+#   adapter: sqlite3
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#   timeout: 5000
 
-development:
-  <<: *default
-  database: db/development.sqlite3
+# development:
+#   <<: *default
+ #  database: db/development.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: db/test.sqlite3
+# test:
+#   <<: *default
+#   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: db/production.sqlite3
+# production:
+# #   <<: *default
+#   database: db/production.sqlite3
 
 
 
@@ -39,17 +39,17 @@ production:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
 
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8mb4
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#   username: root
-#   password: lAxmI.67081
-#   socket: /var/run/mysqld/mysqld.sock
+ default: &default
+   adapter: mysql2
+   encoding: utf8mb4
+   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+   username: root
+   password: lAxmI.67081
+   socket: /var/run/mysqld/mysqld.sock
 
-# development:
-#   <<: *default
-#   database: rails_knihy_development
+ development:
+   <<: *default
+   database: rails_knihy_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -77,8 +77,8 @@ production:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-# production:
-#   <<: *default
-#   database: rails_knihy_production
-#   username: rails_knihy
-#   password: <%= ENV['RAILS_KNIHY_DATABASE_PASSWORD'] %>
+ production:
+   <<: *default
+   database: rails_knihy_production
+   username: rails_knihy
+   password: <%= ENV['RAILS_KNIHY_DATABASE_PASSWORD'] %>

@@ -1,5 +1,6 @@
 class Admin::NationsController < ApplicationController
     before_action :set_nation, only: [:edit, :update, :destroy]
+    before_action :is_not_super_user_redirect
 
     def index
         @nation ||= Nation.new 

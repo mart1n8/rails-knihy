@@ -7,4 +7,10 @@
     <li><%= link_to t('book_category.book_categories'), admin_book_categories_path  %></li>
     <hr>
 <% end %>
+<% if user_signed_in? %>
+    
+        <div><%= link_to "-> #{t('author.add_author')}".html_safe, new_author_path%></div>
+        <div><%= link_to "-> #{t('book.add_book')}".html_safe, new_author_path %></div>
+    
+<% end %>
 </div>

@@ -19,7 +19,12 @@
         <% if user_signed_in? %>
             <%= "#{current_user.username} | #{current_user.email} "%>
             <%= " | "%>
-            <%= link_to t('auth.logout'), destroy_user_session_path, method: "delete" if user_signed_in? %>
+            <%= link_to t('auth.logout'), destroy_user_session_path, method: "delete" %>
+
+        <% else %>
+             <%= link_to t('auth.log_in'), new_user_session_path %>
+                 <%= " | "%>
+              <%= link_to t('auth.register'), new_user_registration_path %>
         <% end %>
     </span>
   </div>

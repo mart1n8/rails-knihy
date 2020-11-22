@@ -12,84 +12,84 @@
 
 ActiveRecord::Schema.define(version: 2020_11_21_084640) do
 
-  create_table "authors", force: :cascade do |t|
+  create_table "authors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "slug", null: false
-    t.integer "nation_id"
+    t.bigint "nation_id"
     t.date "birth_day"
     t.date "death_day"
     t.string "birth_place"
     t.string "death_place"
     t.string "photo"
-    t.integer "user_id", default: 1, null: false
+    t.bigint "user_id", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["nation_id"], name: "index_authors_on_nation_id"
     t.index ["user_id"], name: "index_authors_on_user_id"
   end
 
-  create_table "authors_books", id: false, force: :cascade do |t|
-    t.integer "author_id", null: false
-    t.integer "book_id", null: false
+  create_table "authors_books", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "book_id", null: false
     t.index ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id"
   end
 
-  create_table "book_categories", force: :cascade do |t|
+  create_table "book_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title", null: false
     t.string "slug", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "book_categories_books", id: false, force: :cascade do |t|
-    t.integer "book_id", null: false
-    t.integer "book_category_id", null: false
+  create_table "book_categories_books", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "book_id", null: false
+    t.bigint "book_category_id", null: false
     t.index ["book_id", "book_category_id"], name: "index_book_categories_books_on_book_id_and_book_category_id"
   end
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "original_name"
     t.string "slug"
     t.string "cover_img"
     t.string "publish_year"
     t.text "about"
-    t.integer "user_id", default: 1, null: false
+    t.bigint "user_id", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_books_on_user_id"
   end
 
-  create_table "comments", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.text "text"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "commentable_type", null: false
-    t.integer "commentable_id", null: false
+    t.bigint "commentable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "friendly_id_slugs", force: :cascade do |t|
+  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
-    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, length: { slug: 70, scope: 70 }
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "nations", force: :cascade do |t|
+  create_table "nations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "title", null: false
     t.string "slug", null: false
     t.string "flag", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

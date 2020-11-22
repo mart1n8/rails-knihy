@@ -1,5 +1,6 @@
 class Admin::BookCategoriesController < ApplicationController
     before_action :set_book_category, only: [:edit, :update, :destroy]
+    before_action :is_not_super_user_redirect
 
     def index
         @book_category ||= BookCategory.new 
