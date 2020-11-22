@@ -1,0 +1,2 @@
+<h1><%= t('comment.edit_comment').capitalize %></h1>
+<%= render 'form', comment: @comment, url: edit_comment_path(@comment) ,commentable_id: @comment.commentable_id, commentable_type: @comment.commentable_type %>

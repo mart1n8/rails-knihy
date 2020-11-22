@@ -1,0 +1,42 @@
+<h2><%= t('book.books').capitalize %></h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"><%= t('book.name') %></th>
+            <th scope="col"><%= t('author.authors') %></th>
+            <th scope="col"><i class="material-icons">camera_alt</i></th>
+            <th scope="col"><%= t('options') %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @books.each do |book| %>
+            <tr>
+                <td><%= book.id %></td>
+                <td><%= book.name %></td>
+                <td>
+                  <% book.authors.each do |author| %>
+                    <%= link_to author.full_name, author_path(author) %>  
+                  <% end %>
+                </td>
+                <td>
+                    <%= '<i class="material-icons">check_circle_outline</i>'.html_safe if !book.cover_img.blank? %>
+                    <%= '<i class="material-icons" style="color:red">clear</i>'.html_safe if book.cover_img.blank? %>
+                </td>
+                <td>
+                    <%= link_to material_icon.remove_red_eye, book_path(book) %>
+                    <%= link_to material_icon.edit, edit_book_path(book) %>
+                    <%= link_to material_icon.delete_forever, delete_book_path(book), method: :delete, data: { confirm: 'Skutočne chcete vymazať knihu?' }, style: "color:red" %>
+                </td>
+            </tr>
+        <% end %>
+    <tbody>
+</table>
+<div class="pagination">
+    <%= will_paginate @books %>
+</div>
+
+
+<%= link_to t('book.add_book'), new_book_path %>
+
